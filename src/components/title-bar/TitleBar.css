@@ -9,6 +9,7 @@ div.title-bar {
   user-select: none;
   display: grid;
   grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  grid-template-rows: 1fr;
   align-items: center;
 
   > span {
@@ -19,11 +20,21 @@ div.title-bar {
     display: flex;
     flex-direction: row;
     gap: 0;
+    height: 100%;
 
     > button.window-control {
       width: 3rem;
       background-color: transparent;
       border: none;
+
+      &:hover {
+        background-color: #efefef;
+      }
+
+      &[data-action="close"]:hover {
+        background-color: red;
+        color: white;
+      }
     }
   }
 }
