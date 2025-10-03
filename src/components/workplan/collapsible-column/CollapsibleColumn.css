@@ -1,0 +1,55 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 1st, 2025
+*/
+
+div.collapsible-column {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 2rem);
+  width: var(--width);
+  flex-grow: var(--fill);
+  
+  span {
+    width: 100%;
+    display: block;
+    text-align: var(--center);
+    line-height: 2rem;
+    padding: 0rem 0.5rem;
+  }
+
+  > span.column-title {
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    font-variation-settings: 
+      "GRAD" 100;
+    text-align: center;
+  }
+
+  > span.milestone {
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    font-variation-settings:
+      "wght" 450,
+      "GRAD" 50;
+  }
+
+  > span.task {
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    font-variation-settings: 
+      "wght" 400;
+  }
+
+  > span.subtask {
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    font-variation-settings:
+      "wght" 300;
+  }
+
+  span.red {
+    background-color: red;
+  }
+}

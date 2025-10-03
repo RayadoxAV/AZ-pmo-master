@@ -1,0 +1,110 @@
+/*
+  PMO Master
+  Raymundo Paz
+  September 30th, 2025
+*/
+
+div.edit-workplan {
+  display: grid;
+  grid-template-columns: minmax(50%, 1fr);
+  grid-template-rows: 2.5rem 3rem auto minmax(0, 1fr);
+  gap: 1rem;
+  grid-template-areas:
+  "title"
+  "header"
+  "subheader"
+  "workplan";
+  padding: 1rem;
+
+  > span.title {
+    grid-area: title;
+    font-family: 'Roboto Flex', serif;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-variation-settings: 
+      "wght" 600,
+      "GRAD" 100;
+  }
+
+  > div.header {
+    min-width: 50%;
+    justify-self: center;
+    display: grid;
+    grid-area: header;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+
+    > div.column {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+
+      > span.label {
+        font-family: 'Roboto Flex';
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        font-variation-settings: 
+        "wght" 500,
+        "GRAD" 100;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      > span.value {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-family: 'Roboto Flex';
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-variation-settings: 
+          "wght" 400;
+        text-align: center;
+      }
+    }
+  }
+
+  > div.subheader {
+    display: grid;
+    grid-area: subheader;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+
+    > div.column {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      > span.label {
+        font-family: 'Roboto Flex';
+        font-size: 1rem;
+        line-height: 1.25rem;
+        font-variation-settings:
+          "wght" 500,
+          "GRAD" 100;
+        text-align: center;
+      }
+
+      > span.value {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-family: 'Roboto Flex';
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-variation-settings:
+          "wght" 400;
+        text-align: center;
+      }
+    }
+  }
+
+  > div.workplan-view {
+    grid-area: workplan;
+    overflow: auto;
+    display: grid;
+  }
+}

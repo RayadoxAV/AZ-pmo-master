@@ -1,0 +1,29 @@
+/*
+  PMO Master
+  Raymundo Paz
+  September 30th, 2025
+*/
+
+div.title-bar {
+  height: 2.5rem;
+  user-select: none;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  align-items: center;
+
+  > span {
+    pointer-events: none;
+  }
+
+  > div.window-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+
+    > button.window-control {
+      width: 3rem;
+      background-color: transparent;
+      border: none;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+/*
+  PMO Master
+  Raymundo Paz
+  September 30th, 2025
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+div#root {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+  "titlebar"
+  "content";
+}
+

@@ -1,0 +1,13 @@
+/*
+  PMO Master
+  Raymundo Paz
+  September 30th, 2025
+*/
+
+div.workplan {
+  border: 1px solid #efefef;
+  display: flex;
+  flex-wrap: nowrap;
+  border-radius: 0.5rem;
+  overflow: auto;
+}
