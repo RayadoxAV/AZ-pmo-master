@@ -9,6 +9,7 @@ div.collapsible-column {
   display: grid;
   grid-template-rows: repeat(auto-fill, 2rem);
   width: var(--width);
+  min-width: 3.5rem;
   flex-grow: var(--fill);
   
   span {
@@ -20,11 +21,28 @@ div.collapsible-column {
   }
 
   > span.column-title {
+    display: flex;
+    position: relative;
     font-family: 'Roboto Flex';
     font-size: 0.875rem;
     font-variation-settings: 
       "GRAD" 100;
     text-align: center;
+    border: 1px solid red;
+    align-items: center;
+    gap: 0.5rem;
+
+    > button.column-options-button {
+      opacity: 0;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    &:hover {
+      > button.column-options-button {
+        opacity: 1;
+      }
+    }
   }
 
   > span.milestone {
@@ -47,9 +65,5 @@ div.collapsible-column {
     font-size: 0.875rem;
     font-variation-settings:
       "wght" 300;
-  }
-
-  span.red {
-    background-color: red;
   }
 }

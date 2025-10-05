@@ -25,20 +25,15 @@ const CollapsibleColumn: React.FC<CollapsibleColumnProps> = ({ name = 'Column', 
   return (
     <div className="collapsible-column"
     style={{ '--width': `${defaultSize * 16}px`, '--fill': fillRemainingSpace ? '1' : '0', '--center': centerValues ? 'center' : 'unset'  } as React.CSSProperties}>
-      <span className={`column-title ${customClassName}`}>{ name }</span>
+      <span className={`column-title ${customClassName}`}>
+        { name }
+        <button className="column-options-button"></button>
+      </span>
       {
         data.map((cell, index: number) => (
           <span key={index} className={`${cell.kind} ${customClassName}`}>{cell.value}</span>
         ))
       }
-      {/* <span className="milestone"></span>
-      <span className="task"></span>
-      <span className="subtask"></span>
-      <span className="task"></span>
-      <span className="subtask"></span>
-      <span className="task"></span>
-      <span className="subtask"></span>
-      <span className="milestone"></span> */}
     </div>
   );
 }
