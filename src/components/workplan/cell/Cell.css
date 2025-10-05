@@ -1,0 +1,12 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 4th, 2025
+*/
+
+div.cell {
+  border: 1px solid red;
+}
+
+div.cell.milestone {
+}

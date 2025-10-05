@@ -6,7 +6,9 @@
 
 div.workplan {
   border: 1px solid #efefef;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fill, 2rem);
   flex-wrap: nowrap;
   border-radius: 0.5rem;
   overflow: auto;

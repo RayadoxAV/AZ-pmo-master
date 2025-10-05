@@ -5,85 +5,93 @@
 */
 
 
-import CollapsibleColumn, { CellValue } from './collapsible-column/CollapsibleColumn';
+import CollapsibleRow from './collapsible-row/CollapsibleRow';
+import { CellValue } from './cell/Cell';
+
 import './Workplan.css';
 
-const flags: CellValue[] = [
+const defaultHeaders: CellValue[] = [
+  {
+    kind: 'task',
+    value: 'Flags'
+  },
+  {
+    kind: 'task',
+    value: '#'
+  },
+  {
+    kind: 'task',
+    value: 'Task'
+  },
+  {
+    kind: 'task',
+    value: 'Responsible'
+  },
+  {
+    kind: 'task',
+    value: 'Status'
+  },
+  {
+    kind: 'task',
+    value: 'Progress'
+  },
+  {
+    kind: 'task',
+    value: 'Task Duration'
+  },
+  {
+    kind: 'task',
+    value: 'Start Date'
+  },
+  {
+    kind: 'task',
+    value: 'Finish Date'
+  },
+  {
+    kind: 'task',
+    value: 'New Finish Date'
+  },
+  {
+    kind: 'task',
+    value: 'Actual Date'
+  },
+  {
+    kind: 'task',
+    value: 'Risk Remarks'
+  },
+  {
+    kind: 'task',
+    value: 'Comments'
+  }
+];
+
+const testRow: CellValue[] = [
   {
     kind: 'milestone',
     value: ''
   },
   {
-    kind: 'task',
-    value: 'Report'
-  },
-   {
-    kind: 'task',
-    value: 'Report'
-  }
-];
-
-const taskNumbers: CellValue[] = [
-  {
     kind: 'milestone',
     value: ''
   },
   {
-    kind: 'task',
-    value: '1'
-  },
-  {
-    kind: 'task',
-    value: '2'
-  }
-];
-
-const taskNames: CellValue[] = [
-  {
     kind: 'milestone',
-    value: 'Some milestone',
+    value: 'Milestone'
   },
-  {
-    kind: 'task',
-    value: 'Some task'
-  },
-  {
-    kind: 'subtask',
-    value: 'tEST'
-  }
-];
-
-const taskResponsible: CellValue[] = [
   {
     kind: 'milestone',
     value: ''
-  },
-  {
-    kind: 'task',
-    value: 'Sasasa'
-  },
-  {
-    kind: 'subtask',
-    value: 'Someone'
   }
 ];
+
+const defaultWidths = [5, 3, 12, 8, 0, 0, 8, 8, 8, 8, 8, 12, -1];
 
 const Workplan: React.FC = () => {
+
   return (
     <div className="workplan">
-      <CollapsibleColumn name="Flags" defaultSize={5} data={flags} centerValues={true} customClassName='red' />
-      <CollapsibleColumn name="#" defaultSize={3} data={taskNumbers} centerValues={true} />
-      <CollapsibleColumn name="Task" defaultSize={12} data={taskNames}  />
-      <CollapsibleColumn name="Responsible" defaultSize={8} data={taskResponsible} />
-      <CollapsibleColumn name="Status"  />
-      <CollapsibleColumn name="Progress"  />
-      <CollapsibleColumn name="Task Duration" defaultSize={8}  />
-      <CollapsibleColumn name="Start Date" defaultSize={8} />
-      <CollapsibleColumn name="Finish Date" defaultSize={8}  />
-      <CollapsibleColumn name="New Finish Date" defaultSize={8}  />
-      <CollapsibleColumn name="Actual Date" defaultSize={8}  />
-      <CollapsibleColumn name="Risk Remarks" defaultSize={18} />
-      <CollapsibleColumn name="Comments" fillRemainingSpace={true} />
+      <CollapsibleRow data={defaultHeaders} cellWidths={defaultWidths} headerRow={true} />
+      <CollapsibleRow data={testRow} cellWidths={defaultWidths} />
     </div>
   );
 }
