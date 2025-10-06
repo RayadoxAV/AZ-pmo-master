@@ -1,0 +1,13 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 5th, 2025
+*/
+
+div.context-menu {
+  height: 3rem;
+  background-color: red;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}

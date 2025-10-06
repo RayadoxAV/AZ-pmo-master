@@ -3,6 +3,7 @@
 // import reactLogo from './assets/react.svg';
 
 import './App.css';
+import ContextMenu from './components/context-menu/ContextMenu';
 import TitleBar from './components/title-bar/TitleBar';
 import WorkplanView from './pages/workplan-view/WorkplanView';
 
@@ -54,6 +55,7 @@ function App() {
     <>
       <TitleBar />
       <WorkplanView />
+      <ContextMenu />
     </>
   );
 }
