@@ -5,9 +5,30 @@
 */
 
 div.context-menu {
-  height: 3rem;
-  background-color: red;
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  left: var(--xPos);
+  top: var(--yPos);
+  width: 10rem;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0.25rem;
+  border: 1px solid red;
+  z-index: 4;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+
+  > span.option {
+    font-family: 'Roboto Flex';
+    font-size: 0.875em;
+    line-height: 1.25rem;
+    border: 1px solid blue;
+    user-select: none;
+    cursor: pointer;
+  }
+}
+
+div.context-menu.visible {
+  opacity: 1;
+  pointer-events: all;
 }

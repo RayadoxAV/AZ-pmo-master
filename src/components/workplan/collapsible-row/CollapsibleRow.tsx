@@ -8,7 +8,8 @@ import { useState } from 'react';
 import Cell, { CellValue } from '../cell/Cell';
 import './CollapsibleRow.css';
 import { useAppDispatch } from '../../../state/hooks';
-import { setContextMenuProps } from '../../../state/slices/WindowSlice';
+import { setContextMenuOptions, setContextMenuProps } from '../../../state/slices/WindowSlice';
+import { Action } from '../../../model/Misc';
 
 interface CollapsibleRowProps {
   data: CellValue[];
@@ -16,11 +17,21 @@ interface CollapsibleRowProps {
   headerRow?: boolean;
 }
 
+
 const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, headerRow = false }) => {
 
   const dispatch = useAppDispatch();
 
-  const [isCollapsed, setCollapsed] = useState(false);
+  const [isCollapsed] = useState(false);
+
+  const contextMenuOptions: Action[] = [
+    {
+      name: 'collapse',
+      action: 'collapsible_row.collapse',
+      payload: [1, 2, 3]
+    }
+  ];
+
 
   function generateWidths(): string {
     let width = '';
@@ -41,12 +52,12 @@ const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, 
   }
 
   function handleContextMenu(event: React.MouseEvent): void {
-    
-    dispatch(setContextMenuProps({ visible: true, x: 100, y: 100 }));
+    dispatch(setContextMenuProps({ visible: true, x: event.clientX, y: event.clientY }));
+    dispatch(setContextMenuOptions(contextMenuOptions));
   }
 
   return (
-    <div className={`collapsible-row ${isCollapsed ? 'collapsed' : ''} ${headerRow ? 'header' : ''}`} style={{ '--widths': generateWidths(), '--color': 'red' } as React.CSSProperties} onContextMenu={handleContextMenu}>
+    <div tabIndex={-1} className={`collapsible-row ${isCollapsed ? 'collapsed' : ''} ${headerRow ? 'header' : ''}`} style={{ '--widths': generateWidths(), '--color': 'red' } as React.CSSProperties} onContextMenu={handleContextMenu}>
       {
         data.map((cell, index: number) => (
           <Cell key={`cell-${index}`} cell={cell} className={cell.kind} />
