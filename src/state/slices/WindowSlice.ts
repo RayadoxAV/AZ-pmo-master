@@ -14,7 +14,7 @@ interface WindowSlice {
     y: number;
     options: Action[];
   }
-}
+};
 
 const initialState: WindowSlice = {
   contextMenu: {

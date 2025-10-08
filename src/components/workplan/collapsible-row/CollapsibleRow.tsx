@@ -17,7 +17,6 @@ interface CollapsibleRowProps {
   headerRow?: boolean;
 }
 
-
 const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, headerRow = false }) => {
 
   const dispatch = useAppDispatch();

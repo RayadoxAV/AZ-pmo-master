@@ -100,6 +100,11 @@ div.workplan-view {
       > span {
         font-size: 1.25rem;
       }
+
+      &:focus {
+        opacity: 1;
+        pointer-events: all;
+      }
     }
 
     &:hover {

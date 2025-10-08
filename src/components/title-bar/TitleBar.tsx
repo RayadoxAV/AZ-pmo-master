@@ -32,9 +32,9 @@ const TitleBar: React.FC = () => {
       <span className="icon"></span>
       <span className="title">Something something</span>
       <div className="window-controls">
-        <button className="window-control codicon codicon-chrome-minimize" onClick={handleMinimize}></button>
-        <button className="window-control codicon codicon-chrome-maximize" onClick={handleToggleMaximize}></button>
-        <button data-action="close" className="window-control codicon codicon-chrome-close" onClick={handleClose}></button>
+        <button tabIndex={-1}  className="window-control codicon codicon-chrome-minimize" onClick={handleMinimize}></button>
+        <button tabIndex={-1}  className="window-control codicon codicon-chrome-maximize" onClick={handleToggleMaximize}></button>
+        <button tabIndex={-1}  data-action="close" className="window-control codicon codicon-chrome-close" onClick={handleClose}></button>
       </div>
     </div>
   );

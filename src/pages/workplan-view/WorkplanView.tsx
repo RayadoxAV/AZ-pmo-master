@@ -8,8 +8,11 @@ import { useState } from 'react';
 import Workplan from '../../components/workplan/Workplan';
 
 import './WorkplanView.css';
+import { useAppSelector } from '../../state/hooks';
 
 const WorkplanView: React.FC = () => {
+
+  const selector = useAppSelector((state) => state.workplan);
 
   const [isEditing, setEditing] = useState(false);
   const [isHeaderCollapsed, setHeaderCollapsed] = useState(true);
@@ -31,19 +34,19 @@ const WorkplanView: React.FC = () => {
       <div className="header">
         <div className="column">
           <span className="label">Project  Id</span>
-          <span className="value">MERCH-1</span>
+          <span className="value">{selector.workplan.id}</span>
         </div>
         <div className="column">
           <span className="label">Project Name</span>
-          <span className="value">MDM MX Implementation</span>
+          <span className="value">{selector.workplan.name}</span>
         </div>
         <div className="column">
           <span className="label">Total Progress</span>
-          <span className="value percentage">100%</span>
+          <span className="value percentage">{selector.workplan.totalProgress}%</span>
         </div>
         <div className="column">
           <span className="label">Planned Progress</span>
-          <span className="value percentage">50%</span>
+          <span className="value percentage">{selector.workplan.plannedProgress}%</span>
         </div>
         <button className="collapse" onClick={toggleHeaderCollapsed}>
           <span className="material-symbols-rounded">expand_all</span>
@@ -53,15 +56,15 @@ const WorkplanView: React.FC = () => {
         <div className="container">
           <div className="column">
             <span className="label">Project Objective</span>
-            <span className="value">Some objective that is too long for this column and will not fit into the thing</span>
+            <span className="value">{selector.workplan.objective}</span>
           </div>
           <div className="column">
             <span className="label">Project Owner</span>
-            <span className="value">Manager Name</span>
+            <span className="value">{selector.workplan.owner}</span>
           </div>
           <div className="column">
             <span className="label">Project Start Date</span>
-            <span className="value">Something</span>
+            <span className="value">{selector.workplan.startDate.toString()}</span>
           </div>
           <div className="column">
             <span className="label">Remarks</span>

@@ -6,10 +6,12 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import WindowSlice from './slices/WindowSlice';
+import WorkplanSlice from './slices/WorkplanSlice';
 
 const State = configureStore({
   reducer: {
-    window: WindowSlice
+    window: WindowSlice,
+    workplan: WorkplanSlice
   }
 });
 
