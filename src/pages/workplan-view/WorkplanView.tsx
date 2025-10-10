@@ -8,11 +8,14 @@ import { useState } from 'react';
 import Workplan from '../../components/workplan/Workplan';
 
 import './WorkplanView.css';
-import { useAppSelector } from '../../state/hooks';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { addWorkplanMilestone } from '../../state/slices/WorkplanSlice';
+import { Flag, Milestone, Status } from '../../model/WorkplanModel';
 
 const WorkplanView: React.FC = () => {
 
   const selector = useAppSelector((state) => state.workplan);
+  const dispatch = useAppDispatch();
 
   const [isEditing, setEditing] = useState(false);
   const [isHeaderCollapsed, setHeaderCollapsed] = useState(true);
@@ -22,11 +25,55 @@ const WorkplanView: React.FC = () => {
     setHeaderCollapsed(!tempCollapsed);
   }
 
+  function handleEditingClick(): void {
+    const milestone: Milestone = {
+      name: 'test milestone',
+      riskRemarks: 'remarks',
+      comments: 'some comments',
+      tasks: [
+        {
+          flag: Flag.None,
+          taskNumber: 1,
+          name: 'Some task',
+          responsible: 'Responsible',
+          status: Status.NotStarted,
+          progress: 50,
+          duration: 1,
+          startDate: '18/8/2025',
+          finishDate: '18/8/2025',
+          newFinishDate: '',
+          actualDate: '',
+          riskRemarks: 'Some risks that are different and very long so that we can do',
+          comments: 'Some remakrs',
+          subtasks: []
+        },
+         {
+          flag: Flag.None,
+          taskNumber: 2,
+          name: 'Some task',
+          responsible: 'Responsible',
+          status: Status.NotStarted,
+          progress: 20,
+          duration: 1,
+          startDate: '18/8/2025',
+          finishDate: '18/8/2025',
+          newFinishDate: '',
+          actualDate: '',
+          riskRemarks: 'Some risks that are different',
+          comments: 'Some remakrs',
+          subtasks: []
+        }
+      ]
+    };
+
+    dispatch(addWorkplanMilestone(milestone));
+  }
+
   return (
     <div className="workplan-view">
       <div className="title-container">
         <span className="title">Workplan</span>
-        <button className="edit-button">
+        <button className="edit-button" onClick={handleEditingClick}>
           <span className="material-symbols-rounded">{ isEditing ? 'save' : 'edit' }</span>
           { isEditing ? 'Save' : 'Edit' }
         </button>
@@ -68,15 +115,15 @@ const WorkplanView: React.FC = () => {
           </div>
           <div className="column">
             <span className="label">Remarks</span>
-            <span className="value">Something in the remarks</span>
+            <span className="value">{selector.workplan.remarks}</span>
           </div>
           <div className="column">
             <span className="label">Type of Benefit</span>
-            <span className="value">Benefit</span>
+            <span className="value">{selector.workplan.benefitType}</span>
           </div>
           <div className="column">
             <span className="label">Benefit</span>
-            <span className="value">Some benefit</span>
+            <span className="value">{selector.workplan.benefit}</span>
           </div>
         </div>
       </div>

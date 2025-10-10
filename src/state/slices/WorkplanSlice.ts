@@ -4,8 +4,8 @@
   October 7th, 2025
 */
 
-import { createSlice } from '@reduxjs/toolkit';
-import { BenefitType, Workplan } from '../../model/WorkplanModel';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BenefitType, Milestone, Workplan } from '../../model/WorkplanModel';
 
 interface WorkplanSlice {
   workplan: Workplan;
@@ -33,9 +33,12 @@ export const WorkplanSlice = createSlice({
   name: 'workplan',
   initialState: initialState,
   reducers: {
+    addWorkplanMilestone: (state, action: PayloadAction<Milestone>): void => {
+      state.workplan.milestones.push(action.payload);
+    }
   }
 });
 
-export const { } = WorkplanSlice.actions;
+export const { addWorkplanMilestone } = WorkplanSlice.actions;
 
 export default WorkplanSlice.reducer;

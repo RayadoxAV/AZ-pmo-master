@@ -14,10 +14,10 @@ import { Action } from '../../../model/Misc';
 interface CollapsibleRowProps {
   data: CellValue[];
   cellWidths: number[];
-  headerRow?: boolean;
+  rowType?: 'header' | 'milestone' | 'task' | 'subtask';
 }
 
-const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, headerRow = false }) => {
+const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, rowType = 'task'}) => {
 
   const dispatch = useAppDispatch();
 
@@ -56,10 +56,10 @@ const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, 
   }
 
   return (
-    <div tabIndex={-1} className={`collapsible-row ${isCollapsed ? 'collapsed' : ''} ${headerRow ? 'header' : ''}`} style={{ '--widths': generateWidths(), '--color': 'red' } as React.CSSProperties} onContextMenu={handleContextMenu}>
+    <div tabIndex={-1} className={`collapsible-row ${isCollapsed ? 'collapsed' : ''} ${rowType} `} style={{ '--widths': generateWidths(), '--color': 'red' } as React.CSSProperties} onContextMenu={handleContextMenu}>
       {
         data.map((cell, index: number) => (
-          <Cell key={`cell-${index}`} cell={cell} className={cell.kind} />
+          <Cell key={`cell-${index}`} cell={cell} />
         ))
       }
     </div>

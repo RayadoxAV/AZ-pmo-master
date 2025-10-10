@@ -5,7 +5,7 @@
 */
 
 export enum Flag {
-
+  None = 0
 }
 
 export enum Status {
@@ -28,6 +28,8 @@ export enum BenefitType {
 
 export type Milestone = {
   name: string;
+  riskRemarks: string;
+  comments: string;
   tasks: Task[];
 }
 
@@ -38,6 +40,7 @@ export type Task = {
   responsible: string;
   status: Status;
   progress: number;
+  duration: number;
   startDate: string;
   finishDate: string;
   newFinishDate: string;
