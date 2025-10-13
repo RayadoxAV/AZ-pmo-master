@@ -28,9 +28,13 @@ const items: NavRailItemProps[] = [
 const NavRail: React.FC = () => {
   const [isExpanded, setExpanded] = useState(false);
 
+  function handleCollapseClick(): void {
+    setExpanded(!isExpanded);
+  }
+
   return (
     <div className={`nav-rail ${isExpanded ? 'expanded' : ''}`}>
-      <button className="collapse">
+      <button className="collapse" onClick={handleCollapseClick}>
         <span className="material-symbols-rounded">menu</span>
       </button>
       {
@@ -56,7 +60,9 @@ interface NavRailItemProps {
 const NavRailItem: React.FC<NavRailItemProps> = ({ title, icon, link, className }) => {
   return (
     <div className={`nav-rail-item ${className}`}>
-      <span className="material-symbols-rounded">{icon}</span>
+      <span className="indicator">
+        <span className="material-symbols-rounded">{icon}</span>
+      </span>
       <span className="label">{title}</span>
     </div>
   );
