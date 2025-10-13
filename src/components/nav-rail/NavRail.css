@@ -8,11 +8,11 @@ div.nav-rail {
   width: 6rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+  gap: 0.5rem;
+  align-items: start;
   padding: 1rem 0rem;
-  background-color: #efefef;
-  transition: all 250ms cubic-bezier(0, 0, 0, 1);
+  border: 1px solid #efefef;
+  transition: all 150ms cubic-bezier(0.05,0.7,0.1,1);
 
   > button.collapse {
     aspect-ratio: 1;
@@ -24,40 +24,65 @@ div.nav-rail {
 }
 
 div.nav-rail-item {
+  position: relative;
   height: 3.5rem;
-  width: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  user-select: none;
+  min-width: 6rem;
   cursor: pointer;
-  background-color: red;
 
   > span.indicator {
+    position: absolute;
     width: 3rem;
-    text-align: center;
     height: 1.75rem;
-    border-radius: 2rem;
+    z-index: 0;
+  }
 
-    > span.material-symbols-rounded {
-      line-height: 1.75rem;
-      font-size: 1.5rem;
-    }
+  > span.material-symbols-rounded {
+    position: absolute;
+    top: 0.125rem;
+    left: calc(3rem - 0.75rem);
+    font-size: 1.5rem;
   }
 
   > span.label {
+    position: absolute;
     font-family: 'Roboto Flex';
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1px;
+    z-index: 1;
+    left: 3rem;
+    top: 2.125rem;
+    transform: translate(-50%, 0%);
+  }
+
+  > span.horizontal-label {
+    position: absolute;
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    z-index: 1;
+    transform: translate(0%, 0%);
+    left: calc(3rem + 0.75rem + 0.5rem);
+    top: calc(50% - 0.625rem);
+  }
+
+  > span.indicator {
+    position: absolute;
+    top: 0;
+    left: calc(3rem - 1.5rem);
+    width: 3rem;
+    height: 1.75rem;
+    border-radius: 1rem;
+    z-index: 0;
   }
 }
 
 div.nav-rail-item:hover {
   > span.indicator {
-    background-color: red;
+    background-color: #efefef;
   }
 }
 
@@ -65,9 +90,26 @@ div.nav-rail-item.settings {
   margin-top: auto;
 }
 
+div.nav-rail-item.active {
+  > span.indicator {
+    background-color: #b1b6d1;
+  }
+}
+
 /* Expanded state */
-div.nav-rail.expanded {
-  width: 14rem;
-  /* align-items: start; */
-  /* padding-left: 1rem; */
+ div.nav-rail.expanded {
+  gap: 0.25rem;
+
+  > div.nav-rail-item {
+
+    > span.indicator {
+      height: 3.5rem;
+      width: 8rem;
+      border-radius: 2rem;
+    } 
+
+    > span.material-symbols-rounded {
+      top: calc(50% - 0.75rem);
+    }
+  }
 }
