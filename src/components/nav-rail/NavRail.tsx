@@ -41,10 +41,14 @@ const NavRail: React.FC = () => {
     <motion.div
       layout
       animate={{ width: isExpanded ? '14rem' : '6rem' }}
-      transition={{ duration: 0.250, ease: [0.05, 0.7, 0.1, 1] }}
+      transition={{ duration: 0.350, ease: [0.42, 1.67, 0.21, 0.9] }}
       className={`nav-rail ${isExpanded ? 'expanded' : ''}`}>
       <button className="collapse" onClick={handleCollapseClick}>
-        <span className="material-symbols-rounded">menu</span>
+        <motion.span
+        initial={{ transform: 'rotate(0deg)' }}
+        animate={{ transform: isExpanded ? 'rotate(360deg)' : 'rotate(0deg)' }}
+        transition={{ duration: transitionDuration, ease: transitionEase }}
+          className="material-symbols-rounded">{isExpanded ? 'menu_open' : 'menu'}</motion.span>
       </button >
       {
         items.map((value, index: number) => (
@@ -84,7 +88,7 @@ const NavRailItem: React.FC<NavRailItemProps> = ({ title, icon, link, className 
           (
             <motion.span
               exit={{ opacity: 0 }}
-              transition={{ duration: transitionDuration, ease: transitionEase }}
+              transition={{ duration: transitionDuration - 0.1, ease: transitionEase }}
               className="label">{title}</motion.span>
           )
         }
@@ -95,8 +99,8 @@ const NavRailItem: React.FC<NavRailItemProps> = ({ title, icon, link, className 
             <motion.span
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: transitionDuration, ease: transitionEase }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: transitionDuration - 0.1, ease: transitionEase }}
               className="horizontal-label">{title}</motion.span>
           )
         }

@@ -32,12 +32,15 @@ div#root {
   "titlebar"
   "content";
   position: relative;
+  overflow: hidden;
 }
 
 div.temp-container {
+  height: 100%;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .material-symbols-rounded {
