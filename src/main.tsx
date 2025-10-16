@@ -6,6 +6,7 @@ import { setContextMenuProps } from './state/slices/WindowSlice';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 import App from './App';
+import Home from './pages/home/Home';
 import WorkplanView from './pages/workplan-view/WorkplanView';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -14,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="/" element={<div>home</div>} />
+            <Route path="/" element={<Home />} />
             <Route path="/projects" element={<div>project list</div>} />
             <Route path="/workplan" element={<WorkplanView />} />
             <Route path="/settings" element={<div>settings</div>} />
@@ -26,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 );
 
 
-window.addEventListener('contextmenu', (event: PointerEvent) => {
+window.addEventListener('contextmenu', (event: MouseEvent) => {
   event.preventDefault();
 });
 
