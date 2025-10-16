@@ -6,20 +6,27 @@
 
 import { useRef } from 'react';
 import './Button.css';
-import { create } from 'motion/react-m';
 
 interface ButtonProps {
   icon?: string;
   size?: 'xs' | 's' | 'm' | 'l' | 'xl';
   buttonStyle?: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text';
   children?: any;
+  disabled?: boolean;
+  buttonType?: 'button' | 'reset' | 'submit';
+
+  onClick?: (event: React.MouseEvent) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'filled', children }) => {
+const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'filled', children, disabled = false, buttonType = 'button', onClick }) => {
   const buttonRef = useRef(undefined as any);
 
   function handleButtonClick(event: React.MouseEvent): void {
     createRipple(event.nativeEvent);
+
+    if (onClick) {
+      onClick(event);
+    }
   }
 
   function createRipple(event: MouseEvent): void {
@@ -49,7 +56,12 @@ const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'f
   }
 
   return (
-    <button ref={buttonRef} className={`button ${size} ${buttonStyle}`} onClick={handleButtonClick}>{children}</button>
+    <button 
+      ref={buttonRef} 
+      disabled={disabled} 
+      className={`button ${size} ${buttonStyle}`} 
+      type={buttonType}
+      onClick={handleButtonClick}>{children}</button>
   );
 }
 

@@ -6,15 +6,12 @@
 
 button.button {
   font-family: 'Roboto Flex';
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.25rem;
-  letter-spacing: 0.1px;
   cursor: pointer;
   border: none;
   position: relative;
   overflow: hidden;
   outline: none;
+  transition: box-shadow 250ms cubic-bezier(0.05, 0.7, 0.1, 1);
 
   &::before {
     position: absolute;
@@ -61,24 +58,81 @@ button.button {
     transform: scale(0%);
     border-radius: 50%;
     animation-name: ripple;
-    animation-duration: 1000ms;
+    animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
-    background-color: var(--md-sys-color-secondary);
     pointer-events: none;
   }
 }
 
-button.button.m {
+button.button.xs {
+  height: 2rem;
+  border-radius: 1rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+button.button.s {
   height: 2.5rem;
-  border-radius: 3rem;
+  border-radius: 1.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+button.button.m {
+  height: 3.5rem;
+  border-radius: 1.75rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: 0.15px;
 }
+
+button.button.l {
+  height: 6rem;
+  border-radius: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: 0px;
+}
+
+button.button.xl {
+  height: 8.5rem;
+  border-radius: 4.25rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 2.5rem;
+  letter-spacing: 0px; 
+}
+
 
 button.button.filled {
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
   box-shadow: var(--md-sys-elevation-0);
+
+  > span.ripple {
+    background-color: var(--md-sys-color-on-primary);
+  }
 }
 
 button.button.filled:hover {
@@ -89,13 +143,6 @@ button.button.filled:hover {
     opacity: 1;
     background-color: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, transparent 92%);
   }
-}
-
-button.button.filled[disabled] {
-  cursor: not-allowed;
-  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
-  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
-  box-shadow: var(--md-sys-elevation-0);
 }
 
 button.button.filled:focus-visible {
@@ -119,6 +166,208 @@ button.button.filled:active {
   }
 }
 
+button.button.filled[disabled] {
+  cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+button.button.tonal {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  box-shadow: var(--md-sys-elevation-0);
+
+  > span.ripple {
+    background-color: var(--md-sys-color-on-secondary-container);
+  }
+}
+
+button.button.tonal:hover {
+  color: var(--md-sys-color-on-secondary-container);
+  box-shadow: var(--md-sys-elevation-1);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 8%, transparent 92%);
+  }
+}
+
+button.button.tonal:focus-visible {
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 10%, transparent 90%);
+  }
+}
+
+button.button.tonal:active {
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, color percentage, color percentage);
+  }
+}
+
+button.button.tonal[disabled] {
+  cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+button.button.elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-1);
+
+  > span.ripple {
+    background-color: var(--md-sys-color-primary);
+  }
+}
+
+button.button.elevated:hover {
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-2);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent 92%);
+  }
+}
+
+button.button.elevated:focus-visible {
+  box-shadow: var(--md-sys-elevation-1);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, transparent 90%);
+  }
+}
+
+button.button.elevated:active {
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, transparent 90%);
+  }
+}
+
+button.button.elevated[disabled] {
+  cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+
+button.button.outlined {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border-style: solid;
+  border-color: var(--md-sys-color-outline-variant);
+  border-width: 0.0125rem;
+
+  > span.ripple {
+    background-color: var(--md-sys-color-primary);
+  }
+}
+
+button.button.outlined:hover {
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent 92%);
+  }
+}
+
+button.button.outlined:focus-visible {
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 10%, transparent 90%);
+  }
+}
+
+button.button.outlined:active {
+  &::before {
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 10%, transparent 90%);
+  }
+}
+
+button.button.outlined[disabled] {
+  cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  border-color: var(--md-sys-color-outline-variant);
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+button.button.text {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-0);
+
+  > span.ripple {
+    background-color: var(--md-sys-color-primary);
+  }
+}
+
+button.button.text:hover {
+  color: var(--md-sys-color-primary);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent 92%);
+  }
+}
+
+button.button.text:focus-visible {
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, transparent 90%);
+  }
+}
+
+button.button.text:active {
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, transparent 90%);
+  }
+}
+
+button.button.text[disabled] {
+  cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent 90%);
+  color:  color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  box-shadow: var(--md-sys-elevation-0);
+
+  &::before {
+    opacity: 0;
+  }
+}
+
 /* Animations */
 @keyframes outward-grow {
   0% {
@@ -139,7 +388,7 @@ button.button.filled:active {
 @keyframes ripple {
   0% {
     transform: scale(0%);
-    opacity: 1;
+    opacity: 0.5;
     filter: blur(3rem);
   }
 
