@@ -1,14 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { Provider } from 'react-redux';
 import State from './state/State';
 import { setContextMenuProps } from './state/slices/WindowSlice';
+import { BrowserRouter, Route, Routes } from 'react-router';
+
+import App from './App';
+import WorkplanView from './pages/workplan-view/WorkplanView';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={State}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/" element={<div>home</div>} />
+            <Route path="/projects" element={<div>project list</div>} />
+            <Route path="/workplan" element={<WorkplanView />} />
+            <Route path="/settings" element={<div>settings</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
 );
@@ -43,7 +55,7 @@ window.addEventListener('keydown', (event) => {
 
 
     default: {
-      
+
     }
   }
 });

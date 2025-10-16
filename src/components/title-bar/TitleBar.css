@@ -11,9 +11,24 @@ div.title-bar {
   grid-template-columns: 2.5rem minmax(0, 1fr) auto;
   grid-template-rows: 1fr;
   align-items: center;
+  background-color: var(--md-sys-color-surface-container);
 
   > span {
     pointer-events: none;
+  }
+
+  > span.icon {
+    width: 1rem;
+    height: 1rem;
+    background-color: red;
+    margin-left: 1rem;
+  }
+
+  > span.title {
+    font-family: 'Roboto Flex';
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--md-sys-color-on-surface);
   }
 
   > div.window-controls {
@@ -26,14 +41,17 @@ div.title-bar {
       width: 3rem;
       background-color: transparent;
       border: none;
+      color: var(--md-sys-color-on-surface);
+      transition: all 250ms cubic-bezier(0.05, 0.7, 0.1, 1);
 
       &:hover {
-        background-color: #efefef;
+        background-color: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
       }
 
       &[data-action="close"]:hover {
-        background-color: red;
-        color: white;
+        background-color: var(--md-sys-color-error);
+        color: var(--md-sys-color-on-error);
       }
     }
   }

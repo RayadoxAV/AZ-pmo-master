@@ -2,11 +2,14 @@
 // import { invoke } from '@tauri-apps/api/core';
 // import reactLogo from './assets/react.svg';
 
-import './App.css';
 import ContextMenu from './components/context-menu/ContextMenu';
 import NavRail from './components/nav-rail/NavRail';
 import TitleBar from './components/title-bar/TitleBar';
 import WorkplanView from './pages/workplan-view/WorkplanView';
+
+import './assets/themes/light.css';
+import './App.css';
+import { Outlet, Route, Routes } from 'react-router';
 
 function App() {
   // const [greetMsg, setGreetMsg] = useState("");
@@ -55,9 +58,9 @@ function App() {
   return (
     <>
       <TitleBar />
-      <div className="temp-container">
+      <div className="main-container">
         <NavRail />
-        <WorkplanView />
+        <Outlet />
       </div>
       <ContextMenu />
     </>

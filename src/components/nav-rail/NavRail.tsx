@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { AnimatePresence, Easing, motion } from 'motion/react';
 
 import './NavRail.css';
+import { useMatch, useNavigate } from 'react-router';
 
 const items: NavRailItemProps[] = [
   {
@@ -18,12 +19,12 @@ const items: NavRailItemProps[] = [
   {
     icon: 'list_alt',
     title: 'Projects',
-    link: ''
+    link: '/projects'
   },
   {
     icon: 'table_chart',
     title: 'Workplan',
-    link: ''
+    link: '/workplan'
   }
 ];
 
@@ -45,9 +46,9 @@ const NavRail: React.FC = () => {
       className={`nav-rail ${isExpanded ? 'expanded' : ''}`}>
       <button className="collapse" onClick={handleCollapseClick}>
         <motion.span
-        initial={{ transform: 'rotate(0deg)' }}
-        animate={{ transform: isExpanded ? 'rotate(360deg)' : 'rotate(0deg)' }}
-        transition={{ duration: transitionDuration, ease: transitionEase }}
+          initial={{ transform: 'rotate(0deg)' }}
+          animate={{ transform: isExpanded ? 'rotate(360deg)' : 'rotate(0deg)' }}
+          transition={{ duration: transitionDuration, ease: transitionEase }}
           className="material-symbols-rounded">{isExpanded ? 'menu_open' : 'menu'}</motion.span>
       </button >
       {
@@ -55,7 +56,7 @@ const NavRail: React.FC = () => {
           <NavRailItem key={index} title={value.title} icon={value.icon} link={value.link} expanded={isExpanded} />
         ))
       }
-      <NavRailItem title="Settings" icon="settings" link="" className="settings active" expanded={isExpanded} />
+      <NavRailItem title="Settings" icon="settings" link="/settings" className="settings" expanded={isExpanded} />
     </motion.div>
   );
 }
@@ -71,10 +72,20 @@ interface NavRailItemProps {
 }
 
 const NavRailItem: React.FC<NavRailItemProps> = ({ title, icon, link, className = '', expanded = false }) => {
+
+  const navigate = useNavigate();
+  const match = useMatch(link);
+
+  function handleClick(): void {
+    navigate(link, { viewTransition: true });
+  }
+
   return (
     <motion.div
       layout
-      className={`nav-rail-item ${className}`}>
+      className={`nav-rail-item ${match ? 'active' : ''} ${className}`}
+      tabIndex={0}
+      onClick={handleClick}>
       <motion.span
         layout
         transition={{ duration: transitionDuration, ease: transitionEase }}

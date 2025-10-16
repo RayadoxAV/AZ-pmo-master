@@ -35,12 +35,13 @@ div#root {
   overflow: hidden;
 }
 
-div.temp-container {
+div.main-container {
   height: 100%;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   overflow: hidden;
+  background-color: var(--md-sys-color-surface-container);
 }
 
 .material-symbols-rounded {

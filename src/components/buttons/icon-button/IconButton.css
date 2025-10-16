@@ -1,0 +1,32 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 15th, 2025
+*/
+
+button.icon-button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: none;
+  background-color: transparent;
+  transition: all 150ms cubic-bezier(0.05, 0.7, 0.1, 1);
+
+  > span {
+    font-size: 1.5rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+button.icon-button:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent 92%);
+}
+
+button.icon-button:active {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 10%, transparent 90%);
+}
