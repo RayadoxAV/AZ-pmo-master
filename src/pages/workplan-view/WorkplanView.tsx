@@ -11,6 +11,8 @@ import './WorkplanView.css';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { addWorkplanMilestone } from '../../state/slices/WorkplanSlice';
 import { Flag, Milestone, Status } from '../../model/WorkplanModel';
+import Button from '../../components/buttons/button/Button';
+import IconButton from '../../components/buttons/icon-button/IconButton';
 
 const WorkplanView: React.FC = () => {
 
@@ -26,7 +28,7 @@ const WorkplanView: React.FC = () => {
   }
 
   function handleEditingClick(): void {
-    const milestone: Milestone = {
+/*     const milestone: Milestone = {
       name: 'test milestone',
       riskRemarks: 'remarks',
       comments: 'some comments',
@@ -65,18 +67,17 @@ const WorkplanView: React.FC = () => {
         }
       ]
     };
+ */
+    setEditing(!isEditing);
 
-    dispatch(addWorkplanMilestone(milestone));
+    // dispatch(addWorkplanMilestone(milestone));
   }
 
   return (
     <div className="workplan-view">
       <div className="title-container">
         <span className="title">Workplan</span>
-        <button className="edit-button" onClick={handleEditingClick}>
-          <span className="material-symbols-rounded">{ isEditing ? 'save' : 'edit' }</span>
-          { isEditing ? 'Save' : 'Edit' }
-        </button>
+        <Button className="edit-button" size="s" buttonStyle="tonal" icon={isEditing ? 'save' : 'edit'} onClick={handleEditingClick}>{ isEditing ? 'Save' : 'Edit'}</Button>
       </div>
       <div className="header">
         <div className="column">
@@ -95,9 +96,7 @@ const WorkplanView: React.FC = () => {
           <span className="label">Planned Progress</span>
           <span className="value percentage">{selector.workplan.plannedProgress}%</span>
         </div>
-        <button className="collapse" onClick={toggleHeaderCollapsed}>
-          <span className="material-symbols-rounded">expand_all</span>
-        </button>
+        <IconButton onClick={toggleHeaderCollapsed} icon={isHeaderCollapsed ? 'expand_all' : 'collapse_all'} className="collapse" />
       </div>
       <div className="subheader" style={{ '--collapsed': isHeaderCollapsed ? '0fr' : '1fr' } as React.CSSProperties }>
         <div className="container">

@@ -14,11 +14,11 @@ interface ButtonProps {
   children?: any;
   disabled?: boolean;
   buttonType?: 'button' | 'reset' | 'submit';
-
+  className?: string;
   onClick?: (event: React.MouseEvent) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'filled', children, disabled = false, buttonType = 'button', onClick }) => {
+const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'filled', children, disabled = false, buttonType = 'button', className = '', onClick }) => {
   const buttonRef = useRef(undefined as any);
 
   function handleButtonClick(event: React.MouseEvent): void {
@@ -56,12 +56,17 @@ const Button: React.FC<ButtonProps> = ({ icon = '', size = 'm', buttonStyle = 'f
   }
 
   return (
-    <button 
-      ref={buttonRef} 
-      disabled={disabled} 
-      className={`button ${size} ${buttonStyle}`} 
+    <button
+      ref={buttonRef}
+      disabled={disabled}
+      className={`button ${size} ${buttonStyle} ${className}`}
       type={buttonType}
-      onClick={handleButtonClick}>{children}</button>
+      onClick={handleButtonClick}>
+      {icon && (
+        <span className="material-symbols-rounded">{icon}</span>
+      )}
+      {children}
+    </button>
   );
 }
 
