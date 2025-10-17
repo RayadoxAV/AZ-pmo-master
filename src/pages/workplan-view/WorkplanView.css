@@ -86,7 +86,9 @@ div.workplan-view {
     }
 
     > button.collapse {
-      opacity: 0;
+      align-self: center;
+      
+      /* opacity: 0;
       align-self: center;
       width: 1.5rem;
       height: 1.5rem;
@@ -106,7 +108,7 @@ div.workplan-view {
       &:focus {
         opacity: 1;
         pointer-events: all;
-      }
+      } */
     }
 
     &:hover {
