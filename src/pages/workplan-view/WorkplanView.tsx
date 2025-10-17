@@ -28,48 +28,54 @@ const WorkplanView: React.FC = () => {
   }
 
   function handleEditingClick(): void {
-/*     const milestone: Milestone = {
-      name: 'test milestone',
-      riskRemarks: 'remarks',
-      comments: 'some comments',
-      tasks: [
-        {
-          flag: Flag.None,
-          taskNumber: 1,
-          name: 'Some task',
-          responsible: 'Responsible',
-          status: Status.NotStarted,
-          progress: 50,
-          duration: 1,
-          startDate: '18/8/2025',
-          finishDate: '18/8/2025',
-          newFinishDate: '',
-          actualDate: '',
-          riskRemarks: 'Some risks that are different and very long so that we can do',
-          comments: 'Some remakrs',
-          subtasks: []
-        },
-         {
-          flag: Flag.None,
-          taskNumber: 2,
-          name: 'Some task',
-          responsible: 'Responsible',
-          status: Status.NotStarted,
-          progress: 20,
-          duration: 1,
-          startDate: '18/8/2025',
-          finishDate: '18/8/2025',
-          newFinishDate: '',
-          actualDate: '',
-          riskRemarks: 'Some risks that are different',
-          comments: 'Some remakrs',
-          subtasks: []
-        }
-      ]
-    };
- */
-    setEditing(!isEditing);
+    /*     const milestone: Milestone = {
+          name: 'test milestone',
+          riskRemarks: 'remarks',
+          comments: 'some comments',
+          tasks: [
+            {
+              flag: Flag.None,
+              taskNumber: 1,
+              name: 'Some task',
+              responsible: 'Responsible',
+              status: Status.NotStarted,
+              progress: 50,
+              duration: 1,
+              startDate: '18/8/2025',
+              finishDate: '18/8/2025',
+              newFinishDate: '',
+              actualDate: '',
+              riskRemarks: 'Some risks that are different and very long so that we can do',
+              comments: 'Some remakrs',
+              subtasks: []
+            },
+             {
+              flag: Flag.None,
+              taskNumber: 2,
+              name: 'Some task',
+              responsible: 'Responsible',
+              status: Status.NotStarted,
+              progress: 20,
+              duration: 1,
+              startDate: '18/8/2025',
+              finishDate: '18/8/2025',
+              newFinishDate: '',
+              actualDate: '',
+              riskRemarks: 'Some risks that are different',
+              comments: 'Some remakrs',
+              subtasks: []
+            }
+          ]
+        };
+     */
+    const tempEditing = !isEditing;
+    setEditing(tempEditing);
 
+    if (tempEditing) {
+      setHeaderCollapsed(false);
+    } else {
+      setHeaderCollapsed(true);
+    }
     // dispatch(addWorkplanMilestone(milestone));
   }
 
@@ -77,16 +83,20 @@ const WorkplanView: React.FC = () => {
     <div className="workplan-view">
       <div className="title-container">
         <span className="title">Workplan</span>
-        <Button className="edit-button" size="s" buttonStyle="tonal" icon={isEditing ? 'save' : 'edit'} onClick={handleEditingClick}>{ isEditing ? 'Save' : 'Edit'}</Button>
+        <Button className="edit-button" size="s" buttonStyle="tonal" icon={isEditing ? 'save' : 'edit'} onClick={handleEditingClick}>{isEditing ? 'Save' : 'Edit'}</Button>
       </div>
       <div className="header">
         <div className="column">
           <span className="label">Project  Id</span>
-          <span className="value">{selector.workplan.id}</span>
+          {
+            isEditing ? <input defaultValue={selector.workplan.id} /> : <span className="value">{selector.workplan.id}</span>
+          }
         </div>
         <div className="column">
           <span className="label">Project Name</span>
-          <span className="value">{selector.workplan.name}</span>
+          {
+            isEditing ? <input /> : <span className="value">{selector.workplan.name}</span>
+          }
         </div>
         <div className="column">
           <span className="label">Total Progress</span>
@@ -98,15 +108,19 @@ const WorkplanView: React.FC = () => {
         </div>
         <IconButton onClick={toggleHeaderCollapsed} icon={isHeaderCollapsed ? 'expand_all' : 'collapse_all'} className="collapse" />
       </div>
-      <div className="subheader" style={{ '--collapsed': isHeaderCollapsed ? '0fr' : '1fr' } as React.CSSProperties }>
+      <div className="subheader" style={{ '--collapsed': isHeaderCollapsed ? '0fr' : '1fr' } as React.CSSProperties}>
         <div className="container">
           <div className="column">
             <span className="label">Project Objective</span>
-            <span className="value">{selector.workplan.objective}</span>
+            {
+              isEditing ? <input /> : <span className="value">{selector.workplan.objective}</span>
+            }
           </div>
           <div className="column">
             <span className="label">Project Owner</span>
-            <span className="value">{selector.workplan.owner}</span>
+            {
+              isEditing ? <input /> : <span className="value">{selector.workplan.owner}</span>
+            }
           </div>
           <div className="column">
             <span className="label">Project Start Date</span>
@@ -114,7 +128,9 @@ const WorkplanView: React.FC = () => {
           </div>
           <div className="column">
             <span className="label">Remarks</span>
-            <span className="value">{selector.workplan.remarks}</span>
+            {
+              isEditing ? <input /> : <span className="value">{selector.workplan.remarks}</span>
+            }
           </div>
           <div className="column">
             <span className="label">Type of Benefit</span>
@@ -122,7 +138,9 @@ const WorkplanView: React.FC = () => {
           </div>
           <div className="column">
             <span className="label">Benefit</span>
-            <span className="value">{selector.workplan.benefit}</span>
+            {
+              isEditing ? <input /> : <span className="value">{selector.workplan.benefit}</span>
+            }
           </div>
         </div>
       </div>
