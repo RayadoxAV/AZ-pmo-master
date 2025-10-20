@@ -4,11 +4,24 @@
   October 7th, 2025
 */
 
+import { CellValue } from '../cell/Cell';
+
 import './EditableRow.css';
 
-const EditableRow: React.FC = () => {
+interface EditableRowProps {
+  baseData: CellValue[];
+  cellWidths: number[];
+  rowType?: 'milestone' | 'task' | 'subtask';
+}
+
+const EditableRow: React.FC<EditableRowProps> = ({ baseData = [], cellWidths, rowType = 'task' }) => {
+
+
+
   return (
-    <div>hola</div>
+    <div className="editable-row">
+      {rowType}
+    </div>
   );
 }
 

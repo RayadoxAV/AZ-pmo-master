@@ -7,7 +7,7 @@
 div.workplan-view {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2.5rem 3.5rem auto minmax(0, 1fr);
+  grid-template-rows: 2.5rem auto auto minmax(0, 1fr);
   grid-template-areas:
   "title"
   "header"
@@ -42,7 +42,6 @@ div.workplan-view {
       }
     }
   }
-
 
   > div.header {
     width: 100%;
@@ -87,28 +86,6 @@ div.workplan-view {
 
     > button.collapse {
       align-self: center;
-      
-      /* opacity: 0;
-      align-self: center;
-      width: 1.5rem;
-      height: 1.5rem;
-      aspect-ratio: 1;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      pointer-events: none;
-      user-select: none;
-
-      > span {
-        font-size: 1.25rem;
-      }
-
-      &:focus {
-        opacity: 1;
-        pointer-events: all;
-      } */
     }
 
     &:hover {
@@ -157,10 +134,27 @@ div.workplan-view {
             "wght" 400;
           text-align: center;
         }
+
+        > input.edit {
+          font-size: 0.875rem;
+        }
       }
     }
+  }
 
+  input.edit {
+    background-color: var(--md-sys-color-surface-container-highest);
+    height: 2rem;
+    text-align: center;
 
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    border: none;
+    border-radius: 0.25rem;
+
+    font-family: 'Roboto Flex';
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   > div.workplan-container {

@@ -13,6 +13,7 @@ import { useAppSelector } from '../../state/hooks';
 import type { Workplan, Milestone, Task } from '../../model/WorkplanModel';
 
 import './Workplan.css';
+import EditableRow from './editable-row/EditableRow';
 const defaultHeaders: CellValue[] = [
   {
     cellType: 'text',
@@ -70,23 +71,48 @@ const defaultHeaders: CellValue[] = [
 
 const defaultWidths = [5, 3, 12, 8, 8, 8, 8, 8, 8, 8, 8, 12, -1];
 
-const Workplan: React.FC = () => {
+interface WorkplanProps {
+  isEditing: boolean;
+}
+
+const Workplan: React.FC<WorkplanProps> = ({ isEditing }) => {
 
   const selector = useAppSelector((state) => state.workplan);
 
-  function getRowsOfWorkplan(workplan: Workplan) {
+  function getRowsOfWorkplan(workplan: Workplan): React.ReactElement[] {
     const result = [];
     for (let i = 0; i < workplan.milestones.length; i++) {
       const currentMilestone = workplan.milestones[i];
       result.push(
-        <CollapsibleRow key={`m-${i}`} data={getDataOfMilestone(currentMilestone)} cellWidths={defaultWidths} />
+        <CollapsibleRow key={`m-${i}`} data={getDataOfMilestone(currentMilestone)} cellWidths={defaultWidths} rowType="milestone" />
       );
 
       for (let j = 0; j < currentMilestone.tasks.length; j++) {
         const currentTask = currentMilestone.tasks[j];
 
         result.push(
-          <CollapsibleRow key={`t-${i}-${j}`} data={getDataOfTask(currentTask)} cellWidths={defaultWidths} />
+          <CollapsibleRow key={`t-${i}-${j}`} data={getDataOfTask(currentTask)} cellWidths={defaultWidths} rowType="task" />
+        );
+      }
+    }
+
+    return result;
+  }
+
+  function getEditableRowsOfWorkplan(workplan: Workplan): React.ReactElement[] {
+    const result = [];
+
+    for (let i = 0; i < workplan.milestones.length; i++) {
+      const currentMilestone = workplan.milestones[i];
+      result.push(
+        <EditableRow key={`em-${i}`} baseData={getDataOfMilestone(currentMilestone)} cellWidths={defaultWidths} />
+      );
+
+      for (let j = 0; j < currentMilestone.tasks.length; j++) {
+        const currentTask = currentMilestone.tasks[j];
+
+        result.push(
+          <EditableRow key={`et-${i}-${j}`} baseData={getDataOfTask(currentTask)} cellWidths={defaultWidths} rowType="task" />
         );
       }
     }
@@ -143,7 +169,7 @@ const Workplan: React.FC = () => {
     <div className="workplan">
       <CollapsibleRow data={defaultHeaders} cellWidths={defaultWidths} rowType="header" />
       {
-        getRowsOfWorkplan(selector.workplan)
+        isEditing ? getEditableRowsOfWorkplan(selector.workplan) : getRowsOfWorkplan(selector.workplan)
       }
     </div>
   );

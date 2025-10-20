@@ -89,13 +89,13 @@ const WorkplanView: React.FC = () => {
         <div className="column">
           <span className="label">Project  Id</span>
           {
-            isEditing ? <input defaultValue={selector.workplan.id} /> : <span className="value">{selector.workplan.id}</span>
+            isEditing ? <input defaultValue={selector.workplan.id} className="edit" /> : <span className="value">{selector.workplan.id}</span>
           }
         </div>
         <div className="column">
           <span className="label">Project Name</span>
           {
-            isEditing ? <input /> : <span className="value">{selector.workplan.name}</span>
+            isEditing ? <input defaultValue={selector.workplan.name} className="edit" /> : <span className="value">{selector.workplan.name}</span>
           }
         </div>
         <div className="column">
@@ -113,13 +113,13 @@ const WorkplanView: React.FC = () => {
           <div className="column">
             <span className="label">Project Objective</span>
             {
-              isEditing ? <input /> : <span className="value">{selector.workplan.objective}</span>
+              isEditing ? <input defaultValue={selector.workplan.objective} className="edit" /> : <span className="value">{selector.workplan.objective}</span>
             }
           </div>
           <div className="column">
             <span className="label">Project Owner</span>
             {
-              isEditing ? <input /> : <span className="value">{selector.workplan.owner}</span>
+              isEditing ? <input defaultValue={selector.workplan.owner} className="edit" /> : <span className="value">{selector.workplan.owner}</span>
             }
           </div>
           <div className="column">
@@ -129,7 +129,7 @@ const WorkplanView: React.FC = () => {
           <div className="column">
             <span className="label">Remarks</span>
             {
-              isEditing ? <input /> : <span className="value">{selector.workplan.remarks}</span>
+              isEditing ? <input defaultValue={selector.workplan.remarks} className="edit" /> : <span className="value">{selector.workplan.remarks}</span>
             }
           </div>
           <div className="column">
@@ -139,13 +139,13 @@ const WorkplanView: React.FC = () => {
           <div className="column">
             <span className="label">Benefit</span>
             {
-              isEditing ? <input /> : <span className="value">{selector.workplan.benefit}</span>
+              isEditing ? <input defaultValue={selector.workplan.benefit} className="edit" /> : <span className="value">{selector.workplan.benefit}</span>
             }
           </div>
         </div>
       </div>
       <div className="workplan-container">
-        <Workplan />
+        <Workplan isEditing={isEditing} />
       </div>
     </div>
   );
