@@ -6,10 +6,11 @@
 
 import { useState } from 'react';
 import Cell, { CellValue } from '../cell/Cell';
-import './CollapsibleRow.css';
 import { useAppDispatch } from '../../../state/hooks';
 import { setContextMenuOptions, setContextMenuProps } from '../../../state/slices/WindowSlice';
 import { Action } from '../../../model/Misc';
+
+import './CollapsibleRow.css';
 
 interface CollapsibleRowProps {
   data: CellValue[];
@@ -31,7 +32,6 @@ const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, 
     }
   ];
 
-
   function generateWidths(): string {
     let width = '';
     for (let i = 0; i < cellWidths.length; i++) {
@@ -45,8 +45,8 @@ const CollapsibleRow: React.FC<CollapsibleRowProps> = ({ data = [], cellWidths, 
       } else {
         width += `${currentWidth}rem `;
       }
-
     }
+
     return width;
   }
 

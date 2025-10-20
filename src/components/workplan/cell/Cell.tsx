@@ -7,7 +7,7 @@
 import './Cell.css';
 
 export type CellValue = {
-  cellType: 'text' | 'formattedNumber' | 'percentage';
+  cellType: 'text' | 'formattedNumber' | 'percentage' | 'date' | 'enum';
   value: any;
 };
 
@@ -16,7 +16,7 @@ interface CellProps {
   className?: string;
 }
 
-const Cell: React.FC<CellProps> = ({ cell, className }) => {
+const Cell: React.FC<CellProps> = ({ cell, className = '' }) => {
 
   if (cell.cellType === 'formattedNumber') {
     return (

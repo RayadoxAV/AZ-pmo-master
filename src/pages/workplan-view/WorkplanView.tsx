@@ -5,19 +5,20 @@
 */
 
 import { useState } from 'react';
-import Workplan from '../../components/workplan/Workplan';
+import { useAppSelector } from '../../state/hooks';
 
-import './WorkplanView.css';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { addWorkplanMilestone } from '../../state/slices/WorkplanSlice';
-import { Flag, Milestone, Status } from '../../model/WorkplanModel';
+import Workplan from '../../components/workplan/Workplan';
 import Button from '../../components/buttons/button/Button';
 import IconButton from '../../components/buttons/icon-button/IconButton';
+import FAB from '../../components/buttons/fab/FAB';
+
+import './WorkplanView.css';
+import { AnimatePresence } from 'motion/react';
 
 const WorkplanView: React.FC = () => {
 
   const selector = useAppSelector((state) => state.workplan);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const [isEditing, setEditing] = useState(false);
   const [isHeaderCollapsed, setHeaderCollapsed] = useState(true);
@@ -76,7 +77,6 @@ const WorkplanView: React.FC = () => {
     } else {
       setHeaderCollapsed(true);
     }
-    // dispatch(addWorkplanMilestone(milestone));
   }
 
   return (
@@ -124,7 +124,9 @@ const WorkplanView: React.FC = () => {
           </div>
           <div className="column">
             <span className="label">Project Start Date</span>
-            <span className="value">{selector.workplan.startDate.toString()}</span>
+            {
+              isEditing ? <input type="date" className="edit" /> : <span className="value">{selector.workplan.startDate.toString()}</span>
+            }
           </div>
           <div className="column">
             <span className="label">Remarks</span>
@@ -146,6 +148,20 @@ const WorkplanView: React.FC = () => {
       </div>
       <div className="workplan-container">
         <Workplan isEditing={isEditing} />
+
+        <AnimatePresence>
+          {
+            isEditing &&
+            (
+              <FAB
+                icon="add" 
+                size="s" 
+                buttonType="primary" 
+                onClick={() => { console.log('hola'); }}
+                className="add-row" />
+            )
+          }
+        </AnimatePresence>
       </div>
     </div>
   );

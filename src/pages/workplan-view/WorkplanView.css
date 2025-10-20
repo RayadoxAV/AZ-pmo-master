@@ -164,4 +164,11 @@ div.workplan-view {
     grid-template-rows: minmax(0, 1fr);
     margin-top: 0.5rem;
   }
+
+  button.fab.add-row {
+    position: absolute;
+    right: calc(0% + 1rem);
+    bottom: calc(0% + 1rem);
+    z-index: 2;
+  }
 }

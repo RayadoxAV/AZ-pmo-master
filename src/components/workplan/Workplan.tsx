@@ -146,19 +146,31 @@ const Workplan: React.FC<WorkplanProps> = ({ isEditing }) => {
     }
 
     data[0].value = task.flag;
+    data[0].cellType = 'enum';
+
     data[1].value = task.taskNumber;
     data[2].value = task.name;
     data[3].value = task.responsible;
+
     data[4].value = task.status;
+    data[4].cellType = 'enum';
 
     data[5].value = task.progress;
     data[5].cellType = 'percentage';
 
     data[6].value = task.duration;
     data[7].value = task.startDate;
+    data[7].cellType = 'date';
+
     data[8].value = task.finishDate;
+    data[8].cellType = 'date';
+
     data[9].value = task.newFinishDate;
+    data[9].cellType = 'date';
+
     data[10].value = task.actualDate;
+    data[10].cellType = 'date';
+
     data[11].value = task.riskRemarks;
     data[12].value = task.comments;
 

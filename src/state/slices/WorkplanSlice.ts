@@ -5,7 +5,7 @@
 */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BenefitType, Milestone, Workplan } from '../../model/WorkplanModel';
+import { BenefitType, Flag, Milestone, Status, Workplan } from '../../model/WorkplanModel';
 
 interface WorkplanSlice {
   workplan: Workplan;
@@ -24,7 +24,31 @@ const initialState: WorkplanSlice = {
     remarks: 'Something in the remarks',
     benefitType: BenefitType.BusinessContinuity,
     benefit: 'Some benefit',
-    milestones: []
+    milestones: [
+      {
+        name: 'Some milestone',
+        riskRemarks: '',
+        comments: '',
+        tasks: [
+          {
+            flag: Flag.None,
+            taskNumber: 1,
+            name: 'Task 1',
+            responsible: 'Someone',
+            status: Status.NotStarted,
+            progress: 0,
+            duration: 1,
+            startDate: '1/10/2025',
+            finishDate: '1/10/2025',
+            newFinishDate: '1/10/2025',
+            actualDate: '1/10/2025',
+            riskRemarks: 'remarks',
+            comments: 'comments',
+            subtasks: []
+          }
+        ]
+      }
+    ]
   },
   collapsedIndices: []
 };
