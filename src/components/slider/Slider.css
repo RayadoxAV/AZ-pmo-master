@@ -1,0 +1,76 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 10th, 2025
+*/
+
+div.slider-container {
+  margin-top: 2rem;  /* TODO: Remove this */
+
+  position: relative;
+  border: 1px solid red;
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  gap: 1rem;
+
+  > div.left {
+    width: 0%;
+    background-color: var(--md-sys-color-primary);
+    height: 2.5rem;
+    border-radius: 0.75rem 0.125rem 0.125rem 0.75rem;
+  }
+
+  > button.handle-container {
+    position: absolute;
+    display: flex;
+    background-color: red;
+    background-color: transparent;
+    height: 3.25rem;
+    width: 1rem;
+    border: none;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    > span.handle {
+      width: 0.25rem;
+      height: 100%;
+      background-color: var(--md-sys-color-primary);
+      border-radius: 0.125rem;
+      pointer-events: none;
+    }
+  }
+
+  > div.right {
+    width: 100%;
+    background-color: var(--md-sys-color-secondary-container);
+    height: 2.5rem;
+    border-radius: 0.125rem 0.75rem 0.75rem 0.125rem;
+  }
+
+  > span.value-indicator {
+    position: absolute;
+    left: calc(0px - 0.5rem);
+    top: 0%;
+    width: 2rem;
+    text-align: center;
+
+    font-family: 'Roboto Flex';
+    font-size: 0.75rem;
+    background-color: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+  }
+
+  > span.icon.material-symbols-rounded {
+    position: absolute;
+    display: none;
+  }
+
+  > span.stop-indicator {
+    display: none;
+    position: absolute;
+    background-color: red;
+  }
+}

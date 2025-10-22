@@ -4,17 +4,13 @@
   October 15th, 2025
 */
 
-import Button from '../../components/buttons/button/Button';
+import Slider from '../../components/slider/Slider';
 import './Home.css';
 
 const Home: React.FC = () => {
   return (
     <div style={{ padding: '1rem' }}>
-      <Button icon="home" buttonStyle="filled" size="xs">Some children</Button>
-      <Button icon="home" buttonStyle="filled" size="s">Some children</Button>
-      <Button icon="home" buttonStyle="filled" size="m">Some children</Button>
-      <Button icon="home" buttonStyle="filled" size="l">Some children</Button>
-      <Button icon="home" buttonStyle="filled" size="xl">Some children</Button>
+      <Slider />
     </div>
   );
 }
