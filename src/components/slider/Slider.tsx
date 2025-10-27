@@ -25,6 +25,7 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
   const rightTrackRef = useRef(undefined as any);
 
   const [isIndicatorVisible, setIndicatorVisible] = useState(false);
+  const [value, setValue] = useState(0);
 
 
   function handleDragStart(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void {
@@ -45,19 +46,21 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
 
     const maxX = container.getBoundingClientRect().width - handle.getBoundingClientRect().width;
 
-    const value = (handleX / maxX) * 100;
+    const calculatedValue = (handleX / maxX) * 100;
 
-    indicator.style.left = `calc(${handleX}px - ${handle.clientWidth / 2}px)`;
+    indicator.style.left = `calc(${handleX}px)`;
 
     if (!leftTrackRef.current || !rightTrackRef.current) {
       return;
     }
 
-    leftTrackRef.current.style.width = `${value}%`;
-    rightTrackRef.current.style.width = `${100 - value}%`;
+    leftTrackRef.current.style.width = `${calculatedValue}%`;
+    rightTrackRef.current.style.width = `${100 - calculatedValue}%`;
+
+    setValue(calculatedValue);
   }
 
-  function handleDragEnd(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void {
+  function handleDragEnd(): void {
     setIndicatorVisible(false);
   }
 
@@ -85,8 +88,7 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
       <div 
         ref={rightTrackRef}
         className="right"></div>
-      <span className="stop-indicator">
-      </span>
+      <span className="stop-indicator"></span>
       <AnimatePresence>
         {
           isIndicatorVisible &&
@@ -95,7 +97,7 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="value-indicator">50</motion.span>
+            className="value-indicator">{ value.toFixed(0) }</motion.span>
         }
       </AnimatePresence>
     </motion.div>
