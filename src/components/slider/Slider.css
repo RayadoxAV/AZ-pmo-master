@@ -34,6 +34,13 @@ div.slider-container {
       background-color: var(--md-sys-color-primary);
       border-radius: 0.125rem;
       pointer-events: none;
+      transition: all 250ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    &:active {
+      > span.handle {
+        width: 0.125rem;
+      }
     }
   }
 
@@ -59,7 +66,6 @@ div.slider-container {
 
   > span.icon.material-symbols-rounded {
     position: absolute;
-    display: none;
   }
 
   > span.stop-indicator {
@@ -71,7 +77,6 @@ div.slider-container {
     right: 0.25rem;
   }
 }
-
 
 div.slider-container.xs {
   height: 2.75rem;
@@ -88,6 +93,10 @@ div.slider-container.xs {
   > div.right {
     height: 1rem;
     border-radius: 0.125rem 0.5rem 0.5rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    display: none;
   }
 }
 
@@ -107,6 +116,10 @@ div.slider-container.s {
     height: 1.5rem;
     border-radius: 0.125rem 0.5rem 0.5rem 0.125rem;
   }
+
+  > span.icon.material-symbols-rounded {
+    display: none;
+  }
 }
 
 div.slider-container.m {
@@ -124,6 +137,12 @@ div.slider-container.m {
   > div.right {
     height: 2.5rem;
     border-radius: 0.125rem 0.75rem 0.75rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
@@ -143,6 +162,12 @@ div.slider-container.l {
     height: 3.5rem;
     border-radius: 0.125rem 1rem 1rem 0.125rem;
   }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 div.slider-container.xl {
@@ -160,5 +185,30 @@ div.slider-container.xl {
   > div.right {
     height: 6rem;
     border-radius: 0.125rem 1.75rem 1.75rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+div.slider-container.disabled {
+  > div.left {
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  }
+
+  > button.handle-container {
+    cursor: not-allowed;
+
+    > span.handle {
+      width: 0.25rem;
+      background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+    }
+  }
+  
+  > div.right {
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent 88%);
   }
 }

@@ -10,11 +10,11 @@ import './Home.css';
 const Home: React.FC = () => {
   return (
     <div style={{ padding: '1rem' }}>
-      <Slider size="xs" />
-      <Slider size="s" />
-      <Slider size="m" />
-      <Slider size="l" />
-      <Slider size="xl" />
+      <Slider insetIcon="home" size="xs" />
+      <Slider insetIcon="home" size="s" />
+      <Slider insetIcon="home" size="m" />
+      <Slider insetIcon="home" size="l" />
+      <Slider insetIcon="home" size="xl" disabled={true} />
     </div>
   );
 }
