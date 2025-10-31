@@ -10,14 +10,19 @@ import { AnimatePresence, motion, PanInfo } from 'motion/react';
 import './Slider.css';
 
 interface SliderProps {
+  minValue?: number;
+  maxValue?: number;
+  initialValue?: number;
   size?: 'xs' | 's' | 'm' | 'l' | 'xl';
   insetIcon?: string;
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
+
+  onChange?: (value: number) => void;
 }
 
-const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className = '', style, disabled = false }) => {
+const Slider: React.FC<SliderProps> = ({ minValue = 0, maxValue = 100, initialValue, size = 'm', insetIcon = '', className = '', style, disabled = false, onChange }) => {
   const containerRef = useRef(undefined as any);
   const handleRef = useRef(undefined as any);
   const valueIndicatorRef = useRef(undefined as any);
@@ -26,17 +31,19 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
   const rightTrackRef = useRef(undefined as any);
 
   const [isIndicatorVisible, setIndicatorVisible] = useState(false);
-  const [value, setValue] = useState(20);
+  const [value, setValue] = useState(initialValue || 0);
+  const [iconPosition, setIconPosition] = useState(16 + 6);
 
   useEffect(() => {
-    // leftTrackRef.current.style.width = `${value}%`;
-    // rightTrackRef.current.style.width = `${100 - value}%`;
 
+    if (value === 0) {
+      return;
+    }
     transformControls(value);
   }, []);
 
 
-  function handleDragStart(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void {
+  function handleDragStart(/* event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo */): void {
     if (disabled) {
       return;
     }
@@ -59,13 +66,41 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
     if (disabled) {
       return;
     }
-
-    if (!valueIndicatorRef.current || !handleRef.current || !containerRef.current) {
+    if (!handleRef.current || !containerRef.current) {
       return;
     }
 
-    if (value) {
-      console.log('lamenteibol');
+    if (value !== undefined) {
+      const container = containerRef.current as HTMLDivElement;
+      const handle = handleRef.current as HTMLButtonElement;
+      const indicator = valueIndicatorRef.current as HTMLSpanElement;
+
+      const maxX = container.getBoundingClientRect().width - handle.getBoundingClientRect().width;
+
+
+      const handleX = (value / 100) * maxX;
+
+      if (indicator) {
+        indicator.style.left = `${handleX}px`;
+      }
+
+      leftTrackRef.current.style.width = `${value}%`;
+      rightTrackRef.current.style.width = `${100 - value}%`;
+
+      const transformValues = handle.style.transform.match(/[0-9]+/g);
+
+      if (transformValues) {
+        handle.style.left = `${handleX - Number.parseFloat(transformValues[0])}px`;
+      } else {
+        handle.style.left = `${handleX}px`;
+      }
+
+      if (leftTrackRef.current.clientWidth < 40) {
+        setIconPosition(handleX + 16 + 6);
+      } else {
+        setIconPosition(6);
+      }
+
     } else {
       const container = containerRef.current as HTMLDivElement;
       const handle = handleRef.current as HTMLButtonElement;
@@ -73,12 +108,13 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
 
       const handleX = handle.getBoundingClientRect().x - container.getBoundingClientRect().x;
 
-
       const maxX = container.getBoundingClientRect().width - handle.getBoundingClientRect().width;
 
       const calculatedValue = (handleX / maxX) * 100;
 
-      indicator.style.left = `calc(${handleX}px)`;
+      if (indicator) {
+        indicator.style.left = `calc(${handleX}px)`;
+      }
 
       if (!leftTrackRef.current || !rightTrackRef.current) {
         return;
@@ -87,15 +123,61 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
       leftTrackRef.current.style.width = `${calculatedValue}%`;
       rightTrackRef.current.style.width = `${100 - calculatedValue}%`;
 
+      if (leftTrackRef.current.clientWidth < 40) {
+        setIconPosition(handleX + 16 + 6);
+      } else {
+        setIconPosition(6);
+      }
+
       setValue(calculatedValue);
+
+
+      if (onChange) {
+        onChange(calculatedValue);
+      }
+    }
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const key = event.key;
+
+    if (key === 'ArrowRight') {
+      const tempValue = value + 1;
+      if (tempValue > maxValue) {
+        return;
+      }
+
+      transformControls(tempValue);
+      setValue(tempValue);
+
+      if (onChange) {
+        onChange(tempValue);
+      }
+
+    } else if (key === 'ArrowLeft') {
+      const tempValue = value - 1;
+      if (tempValue < minValue) {
+        return;
+      }
+
+      transformControls(tempValue);
+      setValue(tempValue);
+
+      if (onChange) {
+        onChange(tempValue);
+      }
     }
   }
 
   return (
     <motion.div ref={containerRef} className={`slider-container ${size} ${className} ${disabled ? 'disabled' : ''}`} style={style}>
-      {
-        insetIcon && <span className="icon material-symbols-rounded">{insetIcon}</span>
-      }
+        {
+          insetIcon &&
+          <motion.span
+            animate={{ left: `${iconPosition}px`  }}
+            transition={{ duration: 0.1, ease: [0.05, 0.7, 0.1, 1] }}
+            className="icon material-symbols-rounded">{insetIcon}</motion.span>
+        }
       <div
         ref={leftTrackRef}
         className="left"></div>
@@ -110,7 +192,8 @@ const Slider: React.FC<SliderProps> = ({ size = 'm', insetIcon = '', className =
         onDragStart={handleDragStart}
         onDrag={handleDrag}
         onDragEnd={handleDragEnd}
-        disabled={disabled} >
+        disabled={disabled}
+        onKeyDown={handleKeyDown}>
         <span className="handle"></span>
       </motion.button>
       <div
