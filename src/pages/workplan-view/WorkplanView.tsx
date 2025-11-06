@@ -4,7 +4,7 @@
   September 30th, 2025
 */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAppSelector } from '../../state/hooks';
 
 import Workplan from '../../components/workplan/Workplan';
@@ -14,14 +14,19 @@ import FAB from '../../components/buttons/fab/FAB';
 
 import './WorkplanView.css';
 import { AnimatePresence } from 'motion/react';
+import FabMenu from '../../components/buttons/fab-menu/FabMenu';
 
 const WorkplanView: React.FC = () => {
 
   const selector = useAppSelector((state) => state.workplan);
-  // const dispatch = useAppDispatch();
 
   const [isEditing, setEditing] = useState(false);
   const [isHeaderCollapsed, setHeaderCollapsed] = useState(true);
+  
+  const [isMenuDeployed, setMenuDeployed] = useState(false);
+
+  const fabRef = useRef(undefined as any);
+  const fabMenuRef = useRef(undefined as any);
 
   function toggleHeaderCollapsed(): void {
     const tempCollapsed = isHeaderCollapsed;
@@ -77,6 +82,21 @@ const WorkplanView: React.FC = () => {
     } else {
       setHeaderCollapsed(true);
     }
+  }
+
+  function getFabPosition(): { x: number, y: number } {
+
+    if (!fabRef.current) {
+      return { x: 0, y: 0 };
+    }
+
+    const fab = fabRef.current as HTMLButtonElement;
+    const clientRect = fab.getBoundingClientRect();
+
+    return {
+      x: clientRect.left + clientRect.width,
+      y: clientRect.y
+    };
   }
 
   return (
@@ -154,14 +174,23 @@ const WorkplanView: React.FC = () => {
             isEditing &&
             (
               <FAB
+                ref={fabRef}
                 icon="add" 
                 size="s" 
-                buttonType="primary" 
-                onClick={() => { console.log('hola'); }}
-                className="add-row" />
+                buttonType="primary"
+                onClick={ () => { setMenuDeployed(!isMenuDeployed); } }
+                className="add-row"
+                autoFocus={true}
+                closeButton={isMenuDeployed} />
             )
           }
         </AnimatePresence>
+        { isMenuDeployed && (
+          <FabMenu 
+            ref={fabMenuRef}
+            position={getFabPosition()} 
+            options={['test', 'some longer test', 'asdasdasd']} />
+        ) }
       </div>
     </div>
   );

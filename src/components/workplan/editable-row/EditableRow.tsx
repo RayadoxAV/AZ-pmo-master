@@ -6,9 +6,9 @@
 
 import React from 'react';
 import Cell, { CellValue } from '../cell/Cell';
+import Slider from '../../slider/Slider';
 
 import './EditableRow.css';
-import { input, span } from 'motion/react-client';
 
 interface EditableRowProps {
   baseData: CellValue[];
@@ -46,7 +46,7 @@ const EditableRow: React.FC<EditableRowProps> = ({ baseData = [], cellWidths, ro
       }
 
       case 'percentage': {
-        input = <input key={key} type="range" />;
+        input = <Slider key={key} size="s" initialValue={cell.value as number}  />;
         break;
       }
 

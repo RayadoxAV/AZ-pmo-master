@@ -4,22 +4,24 @@
   October 19th, 2025
 */
 
-import { useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { motion } from 'motion/react';
 
 import './FAB.css';
 
 interface FABProps {
+  buttonRef?: any;
   icon: string;
   onClick: (event: React.MouseEvent) => void;
   size?: 's' | 'm' | 'l';
-  buttonType?: 'primary' | 'secondary' | 'tertiary';
+  buttonType?: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary';
   className?: string;
   style?: React.CSSProperties;
+  autoFocus?: boolean;
+  closeButton?: boolean;
 }
 
-const FAB: React.FC<FABProps> = ({ icon, onClick, size = 's', buttonType = 'primary', className = '', style }) => {
-  const buttonRef = useRef(undefined as any);
+const FABButton: React.FC<FABProps> = ({buttonRef, icon, onClick, size = 's', buttonType = 'primary', className = '', style, autoFocus = false, closeButton = false }) => {
 
   function handleClick(event: React.MouseEvent): void {
     if (onClick) {
@@ -62,12 +64,17 @@ const FAB: React.FC<FABProps> = ({ icon, onClick, size = 's', buttonType = 'prim
       exit={{ opacity: 0, scale: 0.5 }}
       transition={{ duration: 0.300, ease: [0.42, 1.67, 0.21, 0.9] }}
       ref={buttonRef}
-      className={`fab ${size} ${buttonType} ${className}`} 
+      className={`fab ${size} ${buttonType} ${className} ${closeButton ? 'close-button' : ''}`} 
       style={style as React.CSSProperties} 
-      onClick={handleClick}>
-      <span className="material-symbols-rounded">{icon}</span>
+      onClick={handleClick}
+      autoFocus={autoFocus}>
+      <span className="material-symbols-rounded">{closeButton ? 'close' : icon}</span>
     </motion.button>
   );
 }
+
+const FAB = forwardRef((props: FABProps, ref) => (
+  <FABButton  {...props} buttonRef={ref} />
+));
 
 export default FAB;
