@@ -1,0 +1,263 @@
+/*
+  PMO Master
+  Raymundo Paz
+  October 10th, 2025
+*/
+
+div.slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  > div.left {
+    width: 0%;
+    background-color: var(--md-sys-color-primary);
+  }
+
+  > button.handle-container {
+    position: absolute;
+    display: flex;
+    background-color: transparent;
+    width: 1rem;
+    border: none;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+
+    > span.handle {
+      position: relative;
+      width: 0.25rem;
+      height: 100%;
+      background-color: var(--md-sys-color-primary);
+      border-radius: 0.125rem;
+      pointer-events: none;
+      transition: all 250ms cubic-bezier(0.2, 0, 0, 1);
+
+      &::after {
+        display: none;
+        content: '';
+        position: absolute;
+        width: calc(100% + 0.25rem);
+        height: calc(100% + 0.25rem);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        outline-style: solid;
+        outline-color: var(--md-sys-color-secondary);
+        border-radius: 3rem;
+        outline-width: 0.25rem;
+        animation-name: outward-grow, outward-shrink;
+        animation-delay: 0ms, 150ms;
+        outline-offset: 0.0625rem;
+        animation-duration: 150ms, 450ms;
+        animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+        z-index: 2;
+      }
+    }
+
+    &:active {
+      > span.handle {
+        width: 0.125rem;
+      }
+    }
+
+    &:focus-visible {
+
+      > span.handle {
+        &::after {
+          display: unset;
+        }
+      }
+    }
+  }
+
+  > div.right {
+    width: 100%;
+    background-color: var(--md-sys-color-secondary-container);
+  }
+
+  > span.value-indicator {
+    position: absolute;
+    left: calc(0px - 0.5rem);
+    top: -1.4375rem;
+    text-align: center;
+    transform: translate(-35%, -50%);
+    padding: 0.75rem 1rem;
+    font-family: 'Roboto Flex';
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    background-color: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+  }
+
+  > span.icon.material-symbols-rounded {
+    position: absolute;
+    color: var(--md-sys-color-on-primary);
+    left: 0.375rem;
+  }
+
+  > span.stop-indicator {
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 0.125rem;
+    position: absolute;
+    background-color: var(--md-sys-color-on-secondary-container);
+    right: 0.25rem;
+  }
+}
+
+div.slider-container.xs {
+  height: 2.75rem;
+
+  > div.left {
+    height: 1rem;
+    border-radius: 0.5rem 0.125rem 0.125rem 0.5rem;
+  }
+
+  > button.handle-container {
+    height: 2.75rem;
+  }
+  
+  > div.right {
+    height: 1rem;
+    border-radius: 0.125rem 0.5rem 0.5rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    display: none;
+  }
+}
+
+div.slider-container.s {
+  height: 2.75rem;
+
+  > div.left {
+    height: 1.5rem;
+    border-radius: 0.5rem 0.125rem 0.125rem 0.5rem;
+  }
+
+  > button.handle-container {
+    height: 2.75rem;
+  }
+
+  > div.right {
+    height: 1.5rem;
+    border-radius: 0.125rem 0.5rem 0.5rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    display: none;
+  }
+}
+
+div.slider-container.m {
+  height: 3.25rem;
+
+  > div.left {
+    height: 2.5rem;
+    border-radius: 0.75rem 0.125rem 0.125rem 0.75rem;
+  }
+
+  > button.handle-container {
+    height: 3.25rem;
+  }
+
+  > div.right {
+    height: 2.5rem;
+    border-radius: 0.125rem 0.75rem 0.75rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+div.slider-container.l {
+  height: 4.25rem;
+
+  > div.left {
+    height: 3.5rem;
+    border-radius: 1rem 0.125rem 0.125rem 1rem;
+  }
+
+  > button.handle-container {
+    height: 4.25rem;
+  }
+
+  > div.right {
+    height: 3.5rem;
+    border-radius: 0.125rem 1rem 1rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+div.slider-container.xl {
+  height: 6.75rem;
+
+  > div.left {
+    height: 6rem;
+    border-radius: 1.75rem 0.125rem 0.125rem 1.75rem;
+  }
+
+  > button.handle-container {
+    height: 6.75rem;
+  }
+
+  > div.right {
+    height: 6rem;
+    border-radius: 0.125rem 1.75rem 1.75rem 0.125rem;
+  }
+
+  > span.icon.material-symbols-rounded {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+div.slider-container.disabled {
+  > div.left {
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+  }
+
+  > button.handle-container {
+    cursor: not-allowed;
+
+    > span.handle {
+      width: 0.25rem;
+      background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent 62%);
+    }
+  }
+  
+  > div.right {
+    background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent 88%);
+  }
+}
+
+/* Animations */
+@keyframes outward-grow {
+  0% {
+    outline-width: 0rem;
+  }
+
+  100% {
+    outline-width: 0.5rem;
+  }
+}
+
+@keyframes outward-shrink {
+  0% {
+    outline-width: 0.5rem;
+  }
+}

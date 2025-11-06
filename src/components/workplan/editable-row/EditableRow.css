@@ -8,5 +8,4 @@ div.editable-row {
   display: grid;
   grid-template-columns: var(--widths);
   min-height: 2rem;
-  background-color: blue;
 }

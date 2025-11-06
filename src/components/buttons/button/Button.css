@@ -407,21 +407,21 @@ button.button.text[disabled] {
 }
 
 /* Animations */
-@keyframes outward-grow {
+/* @keyframes outward-grow {
   0% {
-    border-width: 0.1875rem;
+    outline-width: 0rem;
   }
 
   100% {
-    border-width: 0.5rem;
+    outline-width: 0.5rem;
   }
 }
 
 @keyframes outward-shrink {
   0% {
-    border-width: 0.5rem;
+    outline-width: 0.5rem;
   }
-}
+} */
 
 @keyframes ripple {
   0% {

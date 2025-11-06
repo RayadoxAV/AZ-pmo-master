@@ -36,7 +36,7 @@ const initialState: WorkplanSlice = {
             name: 'Task 1',
             responsible: 'Someone',
             status: Status.NotStarted,
-            progress: 0,
+            progress: 50,
             duration: 1,
             startDate: '1/10/2025',
             finishDate: '1/10/2025',
