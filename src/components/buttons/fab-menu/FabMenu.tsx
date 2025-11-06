@@ -6,6 +6,7 @@
 
 import { forwardRef, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Action } from '../../../model/Misc';
 
 import './FabMenu.css';
 
@@ -13,7 +14,7 @@ interface FabMenuProps {
   menuRef?: any;
   position: { x: number, y: number };
   menuType?: 'primary' | 'secondary' | 'tertiary';
-  options: string[];
+  options: Action[];
 }
 
 const FabMenuComponent: React.FC<FabMenuProps> = ({ menuRef = undefined,  position, options = [], menuType = 'primary' }) => {
@@ -31,17 +32,24 @@ const FabMenuComponent: React.FC<FabMenuProps> = ({ menuRef = undefined,  positi
     return (length - index) / 20;
   }
 
+  function handleOptionClick(action: string, payload: any[]): void {
+    console.log(action, payload);
+  }
+
   return (
     <div ref={menuRef} className={`fab-menu ${menuType}`} style={{ left: coordinates.x, top: coordinates.y }}>
       <AnimatePresence>
         {
-          options.map((option: string, index: number) => (
+          options.map((option: Action, index: number) => (
             <motion.span 
             initial={{ opacity: 0, transform: 'scaleX(0.2)' }}
             animate={{ opacity: 1, transform: 'scaleX(1)' }}
             exit={{ opacity: 0, transform: 'scaleX(0.2)'}}
             transition={{ delay: getDelay(index, options.length), duration: 0.250,  ease: [0.42, 1.67, 0.21, 0.9] }}
-            tabIndex={0} key={index} className="fab-menu-option">{option}</motion.span>
+            tabIndex={0} key={index} 
+            className="fab-menu-option"
+            onClick={() => { handleOptionClick(option.action, option.payload); }}
+            >{option.name}</motion.span>
           ))
         }
       </AnimatePresence>

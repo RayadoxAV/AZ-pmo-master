@@ -81,6 +81,7 @@ const WorkplanView: React.FC = () => {
       setHeaderCollapsed(false);
     } else {
       setHeaderCollapsed(true);
+      setMenuDeployed(false);
     }
   }
 
@@ -189,7 +190,11 @@ const WorkplanView: React.FC = () => {
           <FabMenu 
             ref={fabMenuRef}
             position={getFabPosition()} 
-            options={['test', 'some longer test', 'asdasdasd']} />
+            options={[
+              { name: 'Add milestone', action: 'workplan.milestone_add', payload: [] },
+              { name: 'Add task', action: 'workplan.task_add', payload: [] },
+              { name: 'Add subtask', action: 'workplan.subtask_add', payload: [] }
+            ]} />
         ) }
       </div>
     </div>
