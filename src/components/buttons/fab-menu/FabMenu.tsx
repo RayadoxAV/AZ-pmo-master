@@ -7,6 +7,7 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Action } from '../../../model/Misc';
+import dispatchCommand from '../../../commands/CommandHandler';
 
 import './FabMenu.css';
 
@@ -32,8 +33,8 @@ const FabMenuComponent: React.FC<FabMenuProps> = ({ menuRef = undefined,  positi
     return (length - index) / 20;
   }
 
-  function handleOptionClick(action: string, payload: any[]): void {
-    console.log(action, payload);
+  function handleOptionClick(action: string, payload: any): void {
+    dispatchCommand(action, payload);
   }
 
   return (

@@ -105,14 +105,14 @@ const Workplan: React.FC<WorkplanProps> = ({ isEditing }) => {
     for (let i = 0; i < workplan.milestones.length; i++) {
       const currentMilestone = workplan.milestones[i];
       result.push(
-        <EditableRow key={`em-${i}`} baseData={getDataOfMilestone(currentMilestone)} cellWidths={defaultWidths} />
+        <EditableRow key={`${currentMilestone.name}-${i}`} baseData={getDataOfMilestone(currentMilestone)} cellWidths={defaultWidths} />
       );
 
       for (let j = 0; j < currentMilestone.tasks.length; j++) {
         const currentTask = currentMilestone.tasks[j];
 
         result.push(
-          <EditableRow key={`et-${i}-${j}`} baseData={getDataOfTask(currentTask)} cellWidths={defaultWidths} rowType="task" />
+          <EditableRow key={`${currentTask.name}-${i}-${j}`} baseData={getDataOfTask(currentTask)} cellWidths={defaultWidths} rowType="task" />
         );
       }
     }

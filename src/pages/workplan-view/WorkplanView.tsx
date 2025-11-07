@@ -65,7 +65,7 @@ const WorkplanView: React.FC = () => {
               duration: 1,
               startDate: '18/8/2025',
               finishDate: '18/8/2025',
-              newFinishDate: '',
+              newFinishDate: '
               actualDate: '',
               riskRemarks: 'Some risks that are different',
               comments: 'Some remakrs',
@@ -191,9 +191,9 @@ const WorkplanView: React.FC = () => {
             ref={fabMenuRef}
             position={getFabPosition()} 
             options={[
-              { name: 'Add milestone', action: 'workplan.milestone_add', payload: [] },
-              { name: 'Add task', action: 'workplan.task_add', payload: [] },
-              { name: 'Add subtask', action: 'workplan.subtask_add', payload: [] }
+              { name: 'Add milestone', action: 'workplan.milestone_add', payload: undefined },
+              { name: 'Add task', action: 'workplan.task_add', payload: undefined },
+              { name: 'Add subtask', action: 'workplan.subtask_add', payload: undefined }
             ]} />
         ) }
       </div>

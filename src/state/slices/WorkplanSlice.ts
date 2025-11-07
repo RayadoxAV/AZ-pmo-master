@@ -5,7 +5,7 @@
 */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BenefitType, Flag, Milestone, Status, Workplan } from '../../model/WorkplanModel';
+import { BenefitType, Flag, Milestone, Status, Task, Workplan } from '../../model/WorkplanModel';
 
 interface WorkplanSlice {
   workplan: Workplan;
@@ -59,10 +59,24 @@ export const WorkplanSlice = createSlice({
   reducers: {
     addWorkplanMilestone: (state, action: PayloadAction<Milestone>): void => {
       state.workplan.milestones.push(action.payload);
+    },
+    addWorkplanMilestoneAtIndex: (state, action: PayloadAction<{ milestone: Milestone, index: number }>): void => {
+      state.workplan.milestones.splice(action.payload.index, 0, action.payload.milestone);
+    },
+    addWorkplanTask: (state, action: PayloadAction<Task>): void => {
+      state.workplan.milestones[0].tasks.push(action.payload);
+    },
+    addWorkplanTaskAtIndex: (state, action: PayloadAction<{ task: Task, index: number }>): void => {
+
     }
   }
 });
 
-export const { addWorkplanMilestone } = WorkplanSlice.actions;
+export const {
+  addWorkplanMilestone,
+  addWorkplanMilestoneAtIndex,
+  addWorkplanTask,
+  addWorkplanTaskAtIndex
+} = WorkplanSlice.actions;
 
 export default WorkplanSlice.reducer;

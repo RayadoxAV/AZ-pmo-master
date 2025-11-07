@@ -7,5 +7,5 @@
 export type Action = {
   name: string;
   action: string;
-  payload: any[];
+  payload: any;
 };

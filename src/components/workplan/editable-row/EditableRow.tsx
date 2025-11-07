@@ -46,7 +46,7 @@ const EditableRow: React.FC<EditableRowProps> = ({ baseData = [], cellWidths, ro
       }
 
       case 'percentage': {
-        input = <Slider key={key} size="s" initialValue={cell.value as number}  />;
+        input = <Slider key={key} size="xs" initialValue={cell.value as number}  />;
         break;
       }
 
